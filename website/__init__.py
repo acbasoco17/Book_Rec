@@ -1,5 +1,15 @@
 from flask import Flask
 from . import private
+import mysql.connector
+
+# TODO: Combine SurveyResults with Recommendations
+db = mysql.connector.connect (
+    host = "localhost",
+    user = private.DB_USERNAME,
+    password = private.DB_PASSWORD,
+    database = "Look_A_Book"
+)
+
 
 def create_app():
     app = Flask(__name__)
