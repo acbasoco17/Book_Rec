@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LookaBook</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .light {
+            --bs-btn-color: #000;
+            --bs-btn-bg: #dddfe0;
+            --bs-btn-border-color: #dddfe0;
+            --bs-btn-hover-color: #000;
+            --bs-btn-hover-bg: #d3d4d5;
+            --bs-btn-hover-border-color: #c6c7c8;
+            --bs-btn-focus-shadow-rgb: 211, 212, 213;
+            --bs-btn-active-color: #000;
+            --bs-btn-active-bg: #c6c7c8;
+            --bs-btn-active-border-color: #babbbc;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #000;
+            --bs-btn-disabled-bg: #f8f9fa;
+            --bs-btn-disabled-border-color: #f8f9fa;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+
+        .text-decoration-none {
+            text-decoration: none !important;
+        }
+
+        .link-body-emphasis {
+            color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-opacity, 1)) !important;
+            text-decoration-color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
+        }
+
+        .me-3 {
+            margin-right: 1rem !important;
+        }
+
+        .py-2 {
+            padding-top: .5rem !important;
+            padding-bottom: .5rem !important;
+        }
+
+        .cover {
+            max-height: 400px;
+            max-width: 356.66px;
+        }
+
+        .card {
+            max-width: 356.66px;
+        }
+
+
+        .truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .icon-square {
+            width: 3rem;
+            height: 3rem;
+            border-radius: .75rem;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            right: 15%;
+            left: 15%;
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem;
+            text-align: center;
+            bottom: 3rem;
+            z-index: 10;
+        }
+
+        .carousel-item {
+            position: relative;
+            display: none;
+            float: left;
+            width: 100%;
+            margin-right: -100%;
+        }
+
+        .centered {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .search {
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .home {
+            position: relative;
+        }
+
+        @media (min-width:992px) {
+            .navbar-expand-lg {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+            }
+        }
+
+        .navbar-collapse {
+            flex-basis: 100%;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .collapse:not(.show) {
+            display: none;
+        }
+
+        .navbar-toggler-icon {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            background-image: var(--bs-navbar-toggler-icon-bg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+    </style>
+    <link href="navbars.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!-- <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar">
+                    <span class="navbar-toggler-icon"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                            fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                        </svg>
+                    </span>
+                </button>
+
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="navbar-nav align-items-center d-flex" style="justify-content: flex-end!important;">
+                        
+                    </div>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <a class="align-items-start link-body-emphasis text-decoration-none" href="home.html"><img
+                src="../static/img/LookABook.png" width=250></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+              <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a role="button" class="me-3 btn btn-light" href="home.html">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3 link-body-emphasis text-decoration-none" href="#">Genre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3 link-body-emphasis text-decoration-none" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3 link-body-emphasis text-decoration-none" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a role="button" class="btn btn-outline-secondary me-3" style="border-radius: 8px;"
+                        href="sign_in.html">Sign
+                        In</a>
+                </li>
+                <li class="nav-item">
+                    <a role="button" class="btn btn-dark me-3" style="border-radius: 8px;"
+                        href="register.html">Register</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+
+    <main>
+        <div class="mb-5 home" style="width: 100%; display: inline-block;">
+            <img width="100%" src="../static/img/Home_Page.png">
+            <div class="container">
+                <span class="centered" style="font-size: 72px; color: black;">LookaBook</span>
+                <br>
+                <span class="centered" style="font-size: 32px; color: black;">Find your next read!</span>
+                <div class="d-flex search carousel-caption justify-content-center">
+                    <input class="form-control" style="margin-right: 1rem!important; width: 338px; border-radius: 8px;"
+                        type="search" name="keywords" id="user_input" placeholder="What is your next read?"
+                        aria-label="Search">
+                    <button class="btn btn-dark" id="search_btn" type="submit"
+                        style="border-radius: 8px;">Search</button>
+                    <div id="response"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-2">
+            <h3 style="margin-left: 1rem; font-size: 24;">Newest Releases</h3>
+            <h4 style="margin-left: 1rem; font-size: 20; color: darkgrey;">What is fresh off the press?</h4>
+
+            <div class="album py-5 bg-body-tertiary">
+                <div>
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col">
+                            <div class="card shadow-sm" style="border-radius: 8px;">
+                                <a href="">
+                                    <img class="bd-placeholder-img card-img-top cover"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Ffirst-character-posters-for-percy-jackson-and-the-olympians-v0-o8hjneobijdb1.jpg%3Fwidth%3D1639%26format%3Dpjpg%26auto%3Dwebp%26s%3D22f493258434ddcabb7014ca9f8121dde2f1d9c2&f=1&nofb=1&ipt=277514da7d4427cdf54eee61e99bd54d92a11ee71c4cbeff19aab5412cc33341&ipo=images">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 24px;">Percy Jackson</p>
+                                    <p class="card-text truncate" style="font-size: 16px; height: 100px;">Percy and his
+                                        friends Grover the
+                                        satyr, and Annabeth, the demigod daughter of Athena, must find and return Zeus's
+                                        stolen property and bring peace to a warring Mount Olympus. They travel cross
+                                        country to the gates of the Underworld in Los Angeles, facing a host of enemies
+                                        determined to stop them.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow-sm" style="border-radius: 8px;">
+                                <a href="">
+                                    <img class="bd-placeholder-img card-img-top cover"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Ffirst-character-posters-for-percy-jackson-and-the-olympians-v0-o8hjneobijdb1.jpg%3Fwidth%3D1639%26format%3Dpjpg%26auto%3Dwebp%26s%3D22f493258434ddcabb7014ca9f8121dde2f1d9c2&f=1&nofb=1&ipt=277514da7d4427cdf54eee61e99bd54d92a11ee71c4cbeff19aab5412cc33341&ipo=images">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 24px;">Percy Jackson</p>
+                                    <p class="card-text truncate" style="font-size: 16px; height: 100px;">Percy and his
+                                        friends Grover the
+                                        satyr, and Annabeth, the demigod daughter of Athena, must find and return Zeus's
+                                        stolen property and bring peace to a warring Mount Olympus. They travel cross
+                                        country to the e Underworld in Los Angeles, facing a host of enemies
+                                        determined to stop them.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow-sm" style="border-radius: 8px;">
+                                <a href="">
+                                    <img class="bd-placeholder-img card-img-top cover"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Ffirst-character-posters-for-percy-jackson-and-the-olympians-v0-o8hjneobijdb1.jpg%3Fwidth%3D1639%26format%3Dpjpg%26auto%3Dwebp%26s%3D22f493258434ddcabb7014ca9f8121dde2f1d9c2&f=1&nofb=1&ipt=277514da7d4427cdf54eee61e99bd54d92a11ee71c4cbeff19aab5412cc33341&ipo=images">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 24px;">Percy Jackson</p>
+                                    <p class="card-text truncate" style="font-size: 16px; height: 100px;">Percy and his
+                                        friends Grover the
+                                        satyr, and Annabeth, the demigod daughter of Athena, must find and return Zeus's
+                                        stolen property and bring peace to a warring Mount Olympus. They travel cross
+                                        country to the gates of the Underworld in Los Angeles, facing a host of enemies
+                                        determined to stop them.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow-sm" style="border-radius: 8px;">
+                                <a href="">
+                                    <img class="bd-placeholder-img card-img-top cover"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Ffirst-character-posters-for-percy-jackson-and-the-olympians-v0-o8hjneobijdb1.jpg%3Fwidth%3D1639%26format%3Dpjpg%26auto%3Dwebp%26s%3D22f493258434ddcabb7014ca9f8121dde2f1d9c2&f=1&nofb=1&ipt=277514da7d4427cdf54eee61e99bd54d92a11ee71c4cbeff19aab5412cc33341&ipo=images">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 24px;">Percy Jackson</p>
+                                    <p class="card-text truncate" style="font-size: 16px; height: 100px;">Percy and his
+                                        friends Grover the
+                                        satyr, and Annabet a warring Mount Olympus. They travel cross
+                                        country to the gates of the Underworld in Los Angeles, facing a host of enemies
+                                        determined to stop them.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow-sm" style="border-radius: 8px;">
+                                <a href="">
+                                    <img class="bd-placeholder-img card-img-top cover"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Ffirst-character-posters-for-percy-jackson-and-the-olympians-v0-o8hjneobijdb1.jpg%3Fwidth%3D1639%26format%3Dpjpg%26auto%3Dwebp%26s%3D22f493258434ddcabb7014ca9f8121dde2f1d9c2&f=1&nofb=1&ipt=277514da7d4427cdf54eee61e99bd54d92a11ee71c4cbeff19aab5412cc33341&ipo=images">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 24px;">Percy Jackson</p>
+                                    <p class="card-text truncate" style="font-size: 16px; height: 100px;">Percy and his
+                                        friends Grover the
+                                        satyr, and Annabeth, the demigod daughter of Athena, must find and return Zeus's
+                                        stolen propertbring peace to a warring Mount Olympus. They travel cross
+                                        country to the gates of the Underworld in Los Angeles, facing a host of enemies
+                                        determined to stop them.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow-sm" style="border-radius: 8px;">
+                                <a href="">
+                                    <img class="bd-placeholder-img card-img-top cover"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Ffirst-character-posters-for-percy-jackson-and-the-olympians-v0-o8hjneobijdb1.jpg%3Fwidth%3D1639%26format%3Dpjpg%26auto%3Dwebp%26s%3D22f493258434ddcabb7014ca9f8121dde2f1d9c2&f=1&nofb=1&ipt=277514da7d4427cdf54eee61e99bd54d92a11ee71c4cbeff19aab5412cc33341&ipo=images">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 24px;">Percy Jackson</p>
+                                    <p class="card-text truncate" style="font-size: 16px; height: 100px;">Percy and his
+                                        friends Grover the
+                                        satyr, and Annabeth, the demigod daughter of Athena, must find and return Zeus's
+                                        stolen property an Mount Olympus. They travel cross
+                                        country to the gates of the Underworld in Los Angeles, facing a host of enemies
+                                        determined to stop them.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="mt-5" style="margin-left: 1rem; size: 24px;">Why LookaBook?</h2>
+            <div class="container">
+                <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                    <div class="col d-flex align-items-start">
+                        <div
+                            class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path
+                                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="fs-2 text-body-emphasis">Keep track of your book preferences</h3>
+                            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with
+                                another sentence and probably just keep going until we run out of words.</p>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-start">
+                        <div
+                            class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path
+                                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="fs-2 text-body-emphasis">Review books you've read</h3>
+                            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with
+                                another sentence and probably just keep going until we run out of words.</p>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-start">
+                        <div
+                            class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path
+                                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="fs-2 text-body-emphasis">Generate books recommendations</h3>
+                            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with
+                                another sentence and probably just keep going until we run out of words.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
