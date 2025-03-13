@@ -3,6 +3,7 @@ from . import private
 import mysql.connector
 
 # TODO: Combine SurveyResults with Recommendations
+# TODO: Add web address of images to database
 db = mysql.connector.connect (
     host = "localhost",
     user = private.DB_USERNAME,
