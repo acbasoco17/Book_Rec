@@ -8,6 +8,5 @@ def home():
     cursor = db.cursor()
     cursor.execute("SELECT * FROM Books LIMIT 6")
     result = cursor.fetchall()
-    for i in result:
-        print(i[2])
+    cursor.close()
     return render_template("home.html", books = result)
