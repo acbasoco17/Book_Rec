@@ -4,8 +4,23 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/sign_in')
+@auth.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        cursor = db.cursor()
+        sql = "SELECT * FROM Users WHERE email = %s"
+        val = (email, )
+        cursor.execute(sql, val)
+        result = cursor.fetchone()
+        if check_password_hash(result[2], password):
+            session['user_email'] = result[3]
+            session['user_name'] = result[1]
+            return redirect(url_for('views.home'))
+        #TODO: Add a message for failed login attempt
+
     return render_template("sign_in.html")
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -26,7 +41,6 @@ def register():
         if len(result) > 0:
             flash("User already exists.")
         else:
-            # TODO: Finish
             sql = "INSERT INTO Users (username, password_hash, email) VALUES (%s, %s, %s)"
             val = (name, password, email)
             cursor.execute(sql, val)
@@ -34,6 +48,11 @@ def register():
             cursor.close()
             session['user_email'] = email
             session['user_name'] = name
-            flash("Added New User")
             return redirect(url_for('views.home'))
     return render_template("register.html")
+
+@auth.route('/logout')
+def logout():
+    if 'user_email' in session:
+        session.clear()
+    return redirect(url_for('auth.sign_in'))

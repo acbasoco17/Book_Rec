@@ -15,6 +15,7 @@ db = mysql.connector.connect (
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = private.SECRET_KEY
+    app.config['SESSION_TYPE'] = "filesystem"
 
     from .views import views
     from.auth import auth
