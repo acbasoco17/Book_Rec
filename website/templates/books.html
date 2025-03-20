@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LookaBook</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .light {
+            --bs-btn-color: #000;
+            --bs-btn-bg: #dddfe0;
+            --bs-btn-border-color: #dddfe0;
+            --bs-btn-hover-color: #000;
+            --bs-btn-hover-bg: #d3d4d5;
+            --bs-btn-hover-border-color: #c6c7c8;
+            --bs-btn-focus-shadow-rgb: 211, 212, 213;
+            --bs-btn-active-color: #000;
+            --bs-btn-active-bg: #c6c7c8;
+            --bs-btn-active-border-color: #babbbc;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #000;
+            --bs-btn-disabled-bg: #f8f9fa;
+            --bs-btn-disabled-border-color: #f8f9fa;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+
+        .text-decoration-none {
+            text-decoration: none !important;
+        }
+
+        .link-body-emphasis {
+            color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-opacity, 1)) !important;
+            text-decoration-color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
+        }
+
+        .me-3 {
+            margin-right: 1rem !important;
+        }
+
+        .py-2 {
+            padding-top: .5rem !important;
+            padding-bottom: .5rem !important;
+        }
+
+        .icon-square {
+            width: 3rem;
+            height: 3rem;
+            border-radius: .75rem;
+        }
+
+        .d-grid {
+            display: grid !important;
+        }
+
+        .gap-3 {
+            gap: 1rem !important;
+        }
+
+        .cover {
+            max-height: 400px;
+            max-width: 356.66px;
+        }
+
+        .card {
+            max-width: 356.66px;
+        }
+
+        .truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .title-trunc {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            right: 15%;
+            left: 15%;
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem;
+            text-align: center;
+            bottom: 3rem;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <a class="align-items-start link-body-emphasis text-decoration-none" href="/"><img
+                src="../static/img/LookABook.png" width=250></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+              <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a role="button" class="me-3 btn btn-light" href="/books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3 link-body-emphasis text-decoration-none" href="/books">Genre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3 link-body-emphasis text-decoration-none" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3 link-body-emphasis text-decoration-none" href="#">Contact</a>
+                </li>
+                {% if 'user_email' not in session %}
+                <li class="nav-item">
+                    <a role="button" class="btn btn-outline-secondary me-3" style="border-radius: 8px;"
+                        href="/sign_in">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a role="button" class="btn btn-dark me-3" style="border-radius: 8px;"
+                        href="/register">Register</a>
+                </li>
+                {% endif %}
+                {% if 'user_email' in session %}
+                <li class="nav-item">
+                    <a role="button" class="btn btn-outline-secondary me-3" style="border-radius: 8px;"
+                            href="/logout"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                            </svg></a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                <form method="POST" class="w-100 d-flex">
+                <input class="form-control"
+                    style="width: 100%; border-radius: 8px;" type="search"
+                    name="keywords" id="user_input" placeholder="Search..." {% if keyword %}value="{{keyword}}" {% endif %} aria-label="Search">
+                
+                <button href="/books" role="button" class="btn btn-dark" id="search_btn" type="submit"
+                    style="border-radius: 8px; margin-left: 0.5 rem;">Search</button>
+                
+            </div>
+        </div>
+        <div class="container-fluid pb-3">
+            <div class="d-grid gap-3" style="grid-template-columns: 1fr 3fr;">
+                <div class="list-group bg-body-tertiary" style="width: 100%; border-radius: 8px; margin-top: 15%;">
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <h6 class="mt-3">Genre</h6>
+                    </label>
+                    {% for genre in genres %}
+                       
+                        <label class="list-group-item d-flex gap-2" style="border: none">
+                            <input class="form-check-input flex-shrink-0" type="checkbox" {% if genre[0] in checked_genres %}checked=""{% endif %} name="genres" value="{{genre[0]}}"">
+                            <span>
+                                &nbsp {{genre[0]}} &nbsp;
+                            </span>
+                            <span style="color: gray; text-align: right;">
+                                ({{genre[1]}})
+                            </span>
+                        </label>
+                        
+                    {% endfor %}
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <h6 class="mt-3">Rating</h6>
+                    </label>
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <input class="form-check-input flex-shrink-0" type="checkbox" value="" name="star" checked="">
+                        <span>
+                            &nbsp 5 Stars
+                        </span>
+                    </label>
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <input class="form-check-input flex-shrink-0" type="checkbox" value="" name="star" checked="">
+                        <span>
+                            &nbsp 4 Stars
+                        </span>
+                    </label>
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <input class="form-check-input flex-shrink-0" type="checkbox" value="" name="star" checked="">
+                        <span>
+                            &nbsp 3 Stars
+                        </span>
+                    </label>
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <input class="form-check-input flex-shrink-0" type="checkbox" value="" name="star" checked="">
+                        <span>
+                            &nbsp 2 Stars
+                        </span>
+                    </label>
+                    <label class="list-group-item d-flex gap-2" style="border: none">
+                        <input class="form-check-input flex-shrink-0" type="checkbox" value="" name="star" checked="">
+                        <span>
+                            &nbsp 1 Star
+                        </span>
+                    </label>
+                    <div style="margin-left: 5rem;">
+                    <button href="/books" role="button" class="btn btn-outline-secondary" id="search_btn" type="submit"
+                    style="border-radius: 8px;">Apply</button>
+                </div>
+                </form>
+                </div>
+                <div class="album py-5 bg-body-tertiary">
+                    <div class="container">
+                        <div id="library" class="row row-cols-1 row-cols-2 row-cols-3 g-3">
+                                {% for book in books %}
+                                <div class="col">
+                                    <div class="card shadow-sm" style="border-radius: 8px;">
+                                        <a href="book_info.php?id=<?php echo $row['book_id']?>">
+                                            <img class="bd-placeholder-img card-img-top cover"
+                                                src="../static/img/{{book[7]}}">
+                                        </a>
+                                        <div class="card-body">
+                                            <p class="card-text title-trunc" style="font-size: 24px;">{{book[2]}}</p>
+                                            <p class="card-text truncate" style="font-size: 16px; height: 100px;">{{book[4]}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
