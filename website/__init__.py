@@ -17,10 +17,11 @@ def create_app():
     app.config['SECRET_KEY'] = private.SECRET_KEY
     app.config['SESSION_TYPE'] = "filesystem"
 
-    from .views import views
+    from .views import views, book
     from.auth import auth
 
     app.register_blueprint(views, url_prefix = "/")
     app.register_blueprint(auth, url_prefix = "/")
+    app.register_blueprint(book, url_prefix="/")
 
     return app

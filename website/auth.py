@@ -18,6 +18,7 @@ def sign_in():
         if check_password_hash(result[2], password):
             session['user_email'] = result[3]
             session['user_name'] = result[1]
+            session['user_id'] = result[0]
             return redirect(url_for('views.home'))
         #TODO: Add a message for failed login attempt
 
@@ -48,6 +49,11 @@ def register():
             cursor.close()
             session['user_email'] = email
             session['user_name'] = name
+            sql = "SELECT * FROM Users WHERE email = %s"
+            val = (email, )
+            cursor.execute(sql, val)
+            result = cursor.fetchone()
+            session['user_id'] = result[0]
             return redirect(url_for('views.home'))
     return render_template("register.html")
 
